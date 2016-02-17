@@ -49,8 +49,6 @@ public class FragmentManagerForApproval extends Fragment implements android.widg
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager_for_approval, container, false);
         managerToBeApproved = (ListView)view.findViewById(R.id.managerToBeApproved);
-        test = (Button)view.findViewById(R.id.test);
-        approve = (Button)view.findViewById(R.id.approve);
         jsonString = GlobalData.getManagerToBeApprovedData();
 
 
@@ -80,28 +78,6 @@ public class FragmentManagerForApproval extends Fragment implements android.widg
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerForApproval).commit();
-            }
-        });
-
-        approve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerForApproval).commit();
-            }
-        });
-
-
-
         return view;
     }
 

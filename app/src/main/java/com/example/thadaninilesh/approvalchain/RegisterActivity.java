@@ -40,7 +40,4 @@ public class RegisterActivity extends AppCompatActivity {
         backgroundTask.execute(method, name, email, password, phone, flag);
     }
 
-    public void sidebar(View view){
-        startActivity(new Intent(this,EmployeeActivity.class));
-    }
 }

@@ -79,12 +79,6 @@ public class ManagerForApprovalAdapter extends ArrayAdapter{
         managerForApprovalHolder.taskDescription.setText("Description: " + managerForApprovalList.getTaskDescription());
         managerForApprovalHolder.taskAmount.setText("Amount: " + managerForApprovalList.getTaskAmount());
 
-
-
-
-
-
-
         return row;
     }
 

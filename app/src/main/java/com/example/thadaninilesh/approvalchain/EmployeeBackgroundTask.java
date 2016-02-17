@@ -1,6 +1,7 @@
 package com.example.thadaninilesh.approvalchain;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -28,13 +29,22 @@ public class EmployeeBackgroundTask extends AsyncTask<String,Void,String> {
     AlertDialog alertDialog;
     Context ctx;
     SharedPreferences sharedPreferences;
+    ProgressDialog progressDialog = null;
     EmployeeBackgroundTask(Context ctx){
         this.ctx = ctx;
     }
     GlobalData globalData = new GlobalData();
     String ip = globalData.getIPData();//ctx.getResources().getString(R.string.ip_address);
 
-
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait, your request is being processed");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
     @Override
     protected String doInBackground(String... params) {
         String method = params[0];
@@ -100,10 +110,7 @@ public class EmployeeBackgroundTask extends AsyncTask<String,Void,String> {
     }
 
 
-    @Override
-    protected void onPreExecute() {
 
-    }
 
     @Override
     protected void onProgressUpdate(Void... values) {
@@ -112,6 +119,13 @@ public class EmployeeBackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String response) {
+        super.onPostExecute(response);
+        if(progressDialog!=null){
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
+            progressDialog= null;
+        }
         if(response.equals("Task successfully sent for approval")){
             Toast.makeText(ctx,response,Toast.LENGTH_LONG).show();
         }

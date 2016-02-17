@@ -1,5 +1,6 @@
 package com.example.thadaninilesh.approvalchain;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -28,6 +29,7 @@ import static com.example.thadaninilesh.approvalchain.GlobalData.*;
 public class EmployeeTaskStatus extends AsyncTask<String,Void,String> {
     Context ctx;
     SharedPreferences sharedPreferences;
+    ProgressDialog progressDialog = null;
     public static final String  MY_CUSTOM_BUNDLE_DATA = "CUSTOM TEXT";
     GlobalData globalData = new GlobalData();
     public EmployeeTaskStatus(Context ctx){this.ctx = ctx;}
@@ -35,6 +37,11 @@ public class EmployeeTaskStatus extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait, your request is being processed. Try again if any problem occurs");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     @Override
@@ -91,29 +98,12 @@ public class EmployeeTaskStatus extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String response) {
-        Toast.makeText(ctx,response,Toast.LENGTH_SHORT).show();
-
-        /*
-         JSONArray ja = new JSONArray();
-        try {
-            JSONArray jsonArray = new JSONArray(response);
-            ja = jsonArray;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i < ja.length(); i++) {
-            try {
-                list.add(ja.getString(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
+        super.onPostExecute(response);
+        if(progressDialog!=null){
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
             }
-            //return "hello";
+            progressDialog= null;
         }
-        */
-
     }
-
-
 }

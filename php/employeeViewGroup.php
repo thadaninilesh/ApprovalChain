@@ -10,8 +10,9 @@ if(mysqli_num_rows($result)>0){
 	$query = "SELECT group_name FROM groups WHERE group_id='$group_id'";
 	$result = mysqli_query($con, $query);
 	if(mysqli_num_rows($result)>0){
-		$row = mysqli_fetch_assoc($result);
-		$group_name = $row['group_name'];
+		while($row = mysqli_fetch_array($result)){
+			$group_name = $row['group_name'];
+		}
 		$query = "SELECT * FROM employees WHERE group_id='$group_id'";
 		$result = mysqli_query($con, $query);
 		$response = array();

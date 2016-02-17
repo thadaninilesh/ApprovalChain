@@ -95,13 +95,6 @@ public class FragmentEmployeeEditDetails extends Fragment {
             }
         });
 
-        if(et_name.getText().toString().isEmpty() || et_phone.getText().toString().isEmpty()){
-            Fragment fragmentEditDetails = new FragmentEmployeeEditDetails();
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame_employee, fragmentEditDetails).commit();
-            //globalData.setBoolean(false);
-        }
         return view;
     }
 

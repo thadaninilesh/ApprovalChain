@@ -1,5 +1,6 @@
 package com.example.thadaninilesh.approvalchain;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
     Context ctx;
     SharedPreferences sharedPreferences;
     GlobalData globalData = new GlobalData();
+    ProgressDialog progressDialog = null;
     private String ip = globalData.getIPData(), address, method;
     public FragmentManagerBackgroundClass(Context ctx){this.ctx = ctx;}
 
@@ -34,7 +36,13 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait, your request is being processed");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
+
 
     @Override
     protected String doInBackground(String... params) {
@@ -171,16 +179,25 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
 
     @Override
     protected void onPostExecute(String response) {
+        super.onPostExecute(response);
+        if(progressDialog!=null){
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
+            progressDialog= null;
+        }
         switch (method){
             case "owngrouplist":{
-                Toast.makeText(ctx,globalData.getManagerGroupData(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx,"You manage this group",Toast.LENGTH_SHORT).show();
                 break;
             }
             case "approvedapprovals":{
-                Toast.makeText(ctx,globalData.getManagerApprovedData(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx,"Approved Approvals",Toast.LENGTH_SHORT).show();
+                break;
             }
             case "pendingapprovals":{
-                Toast.makeText(ctx,globalData.getManagerToBeApprovedData(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx,"Pending Approvals",Toast.LENGTH_SHORT).show();
+                break;
             }
         }
     }

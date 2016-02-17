@@ -1,6 +1,7 @@
 package com.example.thadaninilesh.approvalchain;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,7 @@ import java.net.URLEncoder;
 public class BackgroundTask extends AsyncTask<String,Void,String> {
     Context ctx;
     AlertDialog alertDialog;
+    ProgressDialog progressDialog = null;
     String e_mail;
     public static final String MyPREFERENCES = "ApprovalChain" ;
     SharedPreferences sharedpreferences;
@@ -37,7 +39,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPreExecute() {
-
+        super.onPreExecute();
+        /*progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait, your request is being processed");
+        progressDialog.setCancelable(false);
+        progressDialog.show();*/
     }
 
 
@@ -162,6 +169,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        /*if(progressDialog!=null){
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
+            progressDialog= null;
+        }*/
         if(result.equals("Registeration successful! Login to continue")){
             Toast.makeText(ctx, result, Toast.LENGTH_LONG).show();
             ctx.startActivity(new Intent(ctx, LoginActivity.class));
@@ -194,26 +208,17 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     break;
                 }
             }
-
-
-            //ctx.startActivity(new Intent(ctx, EmployeeActivity.class));
-
-
-            /*GlobalClass globalClass = new GlobalClass(ctx);
-            globalClass.setEmail(e_mail);
-
-            */
-        }
-        else if(result.equals("Invalid credentials, please try again")){
+        } else if(result.equals("Invalid credentials, please try again")){
             Toast.makeText(ctx,result,Toast.LENGTH_LONG).show();
+            ctx.startActivity(new Intent(ctx, LoginActivity.class));
         }
         else if(result.equals("Logged out")){
-
             Toast.makeText(ctx,result,Toast.LENGTH_LONG).show();
             ctx.startActivity(new Intent(ctx, LoginActivity.class));
         }
         else {
             Toast.makeText(ctx,result,Toast.LENGTH_LONG).show();
+            ctx.startActivity(new Intent(ctx, RegisterActivity.class));
         }
     }
 }

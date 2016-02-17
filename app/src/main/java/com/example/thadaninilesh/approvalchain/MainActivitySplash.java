@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivitySplash extends AppCompatActivity {
     SharedPreferences sharedPreferences;
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 2500;
     TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

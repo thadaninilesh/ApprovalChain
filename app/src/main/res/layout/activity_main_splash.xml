@@ -25,6 +25,6 @@
         android:id="@+id/tt"
         android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:text="www.androidhive.info" />
+        android:text="Geniebazaar" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.thadaninilesh.approvalchain;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -25,6 +26,7 @@ import java.net.URLEncoder;
 public class DetailsBackgroundClass extends AsyncTask<String,Void,String> {
     Context ctx;
     GlobalData globalData = new GlobalData();
+    ProgressDialog progressDialog = null;
     String ip = globalData.getIPData();
     private String email, method, address;
     public DetailsBackgroundClass(Context ctx){this.ctx = ctx;}
@@ -32,6 +34,11 @@ public class DetailsBackgroundClass extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait, your request is being processed");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     @Override
@@ -129,9 +136,16 @@ public class DetailsBackgroundClass extends AsyncTask<String,Void,String> {
 
     @Override
     protected void onPostExecute(String response) {
+        super.onPostExecute(response);
+        if(progressDialog!=null){
+            if(progressDialog.isShowing()){
+                progressDialog.dismiss();
+            }
+            progressDialog= null;
+        }
         if(method=="show")
-                Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "Your personal details", Toast.LENGTH_SHORT).show();
         else if(method=="edit")
-                Toast.makeText(ctx, response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "Edited!", Toast.LENGTH_SHORT).show();
     }
 }

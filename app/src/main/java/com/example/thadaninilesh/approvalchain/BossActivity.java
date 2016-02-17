@@ -104,21 +104,21 @@ public class BossActivity extends AppCompatActivity
         if (id == R.id.add_employee) {
             fragmentManager.beginTransaction().replace(R.id.content_frame_boss, new FragmentAddEmployee()).commit();
         } else if (id == R.id.pending_approvals) {
-            Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
-            //FragmentBossBackgroundClass fragmentBossBackgroundClass = new FragmentBossBackgroundClass(this);
+            Fragment fragmentBossForApproval = new FragmentBossForApproval();
+            BossBackgroundTask bossBackgroundClass = new BossBackgroundTask(this);
             sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email", "");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            //fragmentBossBackgroundClass.execute("pendingapprovals",email);
-            //fragmentTransaction.replace(R.id.content_frame_boss, fragmentApprovedApprovals).commit();
+            bossBackgroundClass.execute("pendingapprovals",email);
+            fragmentTransaction.replace(R.id.content_frame_boss, fragmentBossForApproval).commit();
         } else if (id == R.id.approved_approvals) {
-            Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
-            //FragmentBossBackgroundClass fragmentBossBackgroundClass = new FragmentBossBackgroundClass(this);
+            Fragment fragmentBossApprovedApprovals = new FragmentBossApprovedApprovals();
+            BossBackgroundTask bossBackgroundTask = new BossBackgroundTask(this);
             sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email", "");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            //fragmentBossBackgroundClass.execute("pendingapprovals", email);
-            //fragmentTransaction.replace(R.id.content_frame_boss, fragmentApprovedApprovals).commit();
+            bossBackgroundTask.execute("approvedapprovals", email);
+            fragmentTransaction.replace(R.id.content_frame_boss, fragmentBossApprovedApprovals).commit();
         }
          else if (id == R.id.logout) {
             BackgroundTask backgroundTask = new BackgroundTask(this);

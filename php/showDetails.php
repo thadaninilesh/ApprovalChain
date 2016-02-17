@@ -16,10 +16,13 @@ if(mysqli_num_rows($result)>0){
 		}
 		$query = "SELECT group_name FROM groups WHERE group_id='$row[6]'";
 		$result = mysqli_query($con,$query);
+		$group_name="";
 		if(mysqli_num_rows($result)>0){
 			$r = mysqli_fetch_assoc($result);
 			$group_name = $r['group_name'];
-			
+			if($group_name==null){
+				$group_name = "None";
+			}
 		}
 		$response = array();
 		array_push($response,array("name"=>$row[1],"email"=>$row[3],"phone"=>$row[2],"designation"=>$row[5],"group_name"=>$group_name));
