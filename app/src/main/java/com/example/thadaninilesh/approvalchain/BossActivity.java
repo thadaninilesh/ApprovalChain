@@ -18,25 +18,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ManagerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentManagerEditDetails.FragmentManage, FragmentManagerApprovedApprovals.FragmentManage  {
+public class BossActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,FragmentAddEmployee.FragmentBoss, FragmentBossEditDetails.FragmentBoss {
     SharedPreferences sharedPreferences;
+    @Override
+    public void addEmployee(String method, String name, String email, String password, String phone) {
+        BossBackgroundTask bossBackgroundTask = new BossBackgroundTask(this);
+        bossBackgroundTask.execute(method, name, email, password, phone);
+    }
 
     @Override
     public void editDetails(String email, String method, String name, String phone) {
         DetailsBackgroundClass detailsBackgroundClass = new DetailsBackgroundClass(this);
         detailsBackgroundClass.execute(email, method,name, phone);
     }
-    @Override
-    public void viewApproved(String email) {
-
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager);
+        setContentView(R.layout.activity_boss);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,7 +45,7 @@ public class ManagerActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null);
+                        .setAction("Action", null).show();
             }
         });
 
@@ -58,9 +58,8 @@ public class ManagerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame_manager, new FragmentManagerOwnGroup()).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame_boss, new FragmentAddEmployee()).commit();
     }
 
     @Override
@@ -76,7 +75,7 @@ public class ManagerActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manager, menu);
+        getMenuInflater().inflate(R.menu.boss, menu);
         return true;
     }
 
@@ -99,57 +98,46 @@ public class ManagerActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        FragmentManager fragmentManager = getFragmentManager();
         int id = item.getItemId();
+        FragmentManager fragmentManager = getFragmentManager();
 
-       if (id == R.id.own_group_list) {
-            Fragment fragmentManagerOwnGroup = new FragmentManagerOwnGroup();
-            FragmentManagerBackgroundClass fragmentManagerBackgroundClass = new FragmentManagerBackgroundClass(this);
-            sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
-            final String email = sharedPreferences.getString("Email", "");
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentManagerBackgroundClass.execute("owngrouplist", email);
-            fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerOwnGroup).commit();
-
-
+        if (id == R.id.add_employee) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame_boss, new FragmentAddEmployee()).commit();
         } else if (id == R.id.pending_approvals) {
             Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
-            FragmentManagerBackgroundClass fragmentManagerBackgroundClass = new FragmentManagerBackgroundClass(this);
+            //FragmentBossBackgroundClass fragmentBossBackgroundClass = new FragmentBossBackgroundClass(this);
             sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email", "");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentManagerBackgroundClass.execute("pendingapprovals",email);
-            fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerForApproval).commit();
-
+            //fragmentBossBackgroundClass.execute("pendingapprovals",email);
+            //fragmentTransaction.replace(R.id.content_frame_boss, fragmentApprovedApprovals).commit();
         } else if (id == R.id.approved_approvals) {
-            Fragment fragmentManagerApprovedApprovals = new FragmentManagerApprovedApprovals();
-            FragmentManagerBackgroundClass fragmentManagerBackgroundClass = new FragmentManagerBackgroundClass(this);
+            Fragment fragmentManagerForApproval = new FragmentManagerForApproval();
+            //FragmentBossBackgroundClass fragmentBossBackgroundClass = new FragmentBossBackgroundClass(this);
             sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email", "");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentManagerBackgroundClass.execute("approvedapprovals",email);
-            fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerApprovedApprovals).commit();
-
-        } else if (id == R.id.edit_details) {
-            Fragment fragmentManagerEditDetails = new FragmentManagerEditDetails();
+            //fragmentBossBackgroundClass.execute("pendingapprovals", email);
+            //fragmentTransaction.replace(R.id.content_frame_boss, fragmentApprovedApprovals).commit();
+        }
+         else if (id == R.id.logout) {
+            BackgroundTask backgroundTask = new BackgroundTask(this);
+            backgroundTask.execute("logout");
+            finish();
+        }
+        else if (id == R.id.edit_details){
+            Fragment fragmentBossEditDetails = new FragmentBossEditDetails();
             DetailsBackgroundClass detailsBackgroundClass = new DetailsBackgroundClass(this);
             sharedPreferences = getSharedPreferences("ApprovalChain",Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email","");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             detailsBackgroundClass.execute(email,"show");
-            fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerEditDetails).commit();
-
-        } else if (id == R.id.logout) {
-            BackgroundTask backgroundTask = new BackgroundTask(this);
-            backgroundTask.execute("logout");
-            finish();
+            fragmentTransaction.replace(R.id.content_frame_boss, fragmentBossEditDetails).commit();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 }

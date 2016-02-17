@@ -42,7 +42,7 @@ public class MainActivitySplash extends AppCompatActivity {
                     startActivity(new Intent(MainActivitySplash.this,ManagerActivity.class));
                 }
                 else if(designation.equals("2")){
-
+                    startActivity(new Intent(MainActivitySplash.this,BossActivity.class));
                 }
                 // close this activity
                 finish();

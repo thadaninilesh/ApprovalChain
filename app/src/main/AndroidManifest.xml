@@ -31,6 +31,10 @@
         <activity
             android:name=".ManagerActivity"
             android:label="@string/title_activity_manager"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".BossActivity"
+            android:label="@string/title_activity_boss"
             android:theme="@style/AppTheme"></activity>
     </application>
 

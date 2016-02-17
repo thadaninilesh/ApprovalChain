@@ -128,8 +128,6 @@ SharedPreferences sharedPreferences;
             employeeTaskStatus.execute(email);
             fragmentTransaction.replace(R.id.content_frame_employee, fragmentEmployeeTask).commit();
 
-        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.edit_details) {
 
 

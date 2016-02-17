@@ -174,7 +174,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ctx.startActivity(i);
-                    Toast.makeText(ctx,result+"Employee Access",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx,"Employee Access",Toast.LENGTH_LONG).show();
                     break;
                 }
                 case "1":{
@@ -182,11 +182,16 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ctx.startActivity(i);
-                    Toast.makeText(ctx,result+"Manager Access",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx,"Manager Access",Toast.LENGTH_LONG).show();
                     break;
                 }
                 case "2":{
-
+                    Intent i = new Intent(ctx,BossActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ctx.startActivity(i);
+                    Toast.makeText(ctx,"Boss Access",Toast.LENGTH_LONG).show();
+                    break;
                 }
             }
 

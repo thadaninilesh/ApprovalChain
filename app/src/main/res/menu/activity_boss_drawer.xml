@@ -3,25 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/own_group_list"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="Employees in my group" />
+            android:id="@+id/add_employee"
+            android:icon="@drawable/ic_person_add_black_24dp"
+            android:title="Add Employees" />
         <item
-            android:id="@+id/ic_view_list_black_24dp"
+            android:id="@+id/pending_approvals"
             android:icon="@drawable/ic_view_list_black_24dp"
             android:title="Pending approvals" />
         <item
             android:id="@+id/approved_approvals"
             android:icon="@drawable/ic_done_all_black_24dp"
-            android:title="Approved approvals" />
+            android:title="Approved Approvals" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Personal Information">
         <menu>
             <item
                 android:id="@+id/edit_details"
                 android:icon="@drawable/ic_healing_black_24dp"
-                android:title="Edit personal info" />
+                android:title="Edit" />
             <item
                 android:id="@+id/logout"
                 android:icon="@drawable/ic_lock_black_24dp"

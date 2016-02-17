@@ -121,7 +121,47 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
                 } catch (Exception e) {
                 }
                 break;
+            }
+            case "pendingapprovals":{
+                String email = params[1];
+                address = "http://"+ip+"/ApprovalChain/php/approvalWaitingManager.php";
+                try {
+                    URL url = new URL(address);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("POST");
+                    httpURLConnection.setDoOutput(true);
+                    OutputStream os = httpURLConnection.getOutputStream();
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
 
+                    String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                    os.close();
+
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "ISO-8859-1"));
+                    String response = "";
+                    String line = "";
+                    while ((line = bufferedReader.readLine()) != null) {
+                        response += line;
+                    }
+                    globalData.setManagerToBeApprovedData(response);
+
+                    return response;
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (ProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                }
+                break;
             }
         }
         return null;
@@ -138,6 +178,9 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
             }
             case "approvedapprovals":{
                 Toast.makeText(ctx,globalData.getManagerApprovedData(),Toast.LENGTH_SHORT).show();
+            }
+            case "pendingapprovals":{
+                Toast.makeText(ctx,globalData.getManagerToBeApprovedData(),Toast.LENGTH_SHORT).show();
             }
         }
     }

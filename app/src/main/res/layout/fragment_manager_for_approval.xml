@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.thadaninilesh.approvalchain.FragmentManagerForApproval">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/managerToBeApproved"        android:layout_alignParentStart="true"
+        android:divider="#f11cff">
+    </ListView>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/test"
+        android:text="Press Here"
+        android:layout_below="@+id/managerToBeApproved"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/approve"
+        android:text="Approve these requests"
+        android:layout_below="@+id/test"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>

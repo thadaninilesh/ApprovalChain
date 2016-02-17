@@ -9,6 +9,15 @@ public class GlobalData {
     public static String editData = new String();
     public static String managerGroupData = new String();
     public static String managerApprovedData = new String();
+    public static String managerToBeApprovedData = new String();
+
+    public static String getManagerToBeApprovedData() {
+        return managerToBeApprovedData;
+    }
+
+    public static void setManagerToBeApprovedData(String managerToBeApprovedData) {
+        GlobalData.managerToBeApprovedData = managerToBeApprovedData;
+    }
 
     public static String getManagerApprovedData() {
         return managerApprovedData;
@@ -34,10 +43,6 @@ public class GlobalData {
         GlobalData.managerGroupData = managerGroupData;
     }
 
-    public String getIPData(){
-        return "192.168.0.2";
-    }
-
     public static String getTaskData() { return taskData; }
 
     public void setTaskData(String data) {
@@ -53,5 +58,9 @@ public class GlobalData {
     public void setEditDetails(String data) { this.editData = data; }
 
     public String getEditDetails(){ return editData; }
+
+    public String getIPData(){
+        return "192.168.0.2";
+    }
 
 }
