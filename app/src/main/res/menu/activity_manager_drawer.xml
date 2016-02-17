@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/add_employee"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Add Employees" />
+        <item
+            android:id="@+id/own_group_list"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Employees in my group" />
+        <item
+            android:id="@+id/pending_approvals"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Pending approvals" />
+        <item
+            android:id="@+id/approved_approvals"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Approved approvals" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/edit_details"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Edit personal info" />
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Logout" />
+        </menu>
+    </item>
+
+</menu>

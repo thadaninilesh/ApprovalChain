@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_taskName"
+        android:layout_alignParentLeft="true"
+        android:text="Nilesh"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_taskDescription"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/tx_taskName"
+        android:text="Nilesh"/>
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_taskAmount"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/tx_taskDescription"
+        android:layout_toLeftOf="@+id/tx_taskStatus"
+        android:text="Nilesh"/>
+    <TextView
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tx_taskStatus"
+        android:gravity="center"
+        android:text="Nilesh"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
