@@ -6,12 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.thadaninilesh.approvalchain.FragmentManagerOwnGroup">
+    tools:context="com.example.thadaninilesh.approvalchain.FragmentManagerApprovedApprovals">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/managerOwnGroupList"
+        android:id="@+id/managerApprovedApprovals"
         android:layout_alignParentStart="true"
         android:divider="#f11cff">
     </ListView>
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/test"
         android:text="Press Here"
-        android:layout_below="@+id/managerOwnGroupList"/>
+        android:layout_below="@+id/managerApprovedApprovals"/>
 
 
 </RelativeLayout>

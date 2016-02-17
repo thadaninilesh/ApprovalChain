@@ -19,29 +19,30 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FragmentManagerOwnGroup extends Fragment {
+public class FragmentManagerApprovedApprovals extends Fragment {
     String email;
     String jsonString;
-    FragmentManager fragmentManager;
+    FragmentManage fragmentManage;
     String json;
-    String employeeName = "", employeeEmail = "", employeePhone = "";
-    ManagerOwnGroupAdapter managerOwnGroupAdapter;
+    String employeeName = "", employeeEmail = "", taskName = "", taskAmount, taskDescription, taskStatus;
+    ManagerApprovedApprovalsAdapter managerApprovedApprovalsAdapter;
     JSONArray jsonArray;
     JSONObject jsonObject;
-    ListView managerOwnGroupList;
+    ListView managerApprovedApprovals;
     Button test;
-    FragmentManagerOwnGroup fragmentManagerOwnGroup;
+    FragmentManagerApprovedApprovals fragmentManagerApprovedApprovals;
     @TargetApi(Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manager_own_group, container, false);
-        managerOwnGroupList = (ListView)view.findViewById(R.id.managerOwnGroupList);
+        View view = inflater.inflate(R.layout.fragment_manager_approved_approvals, container, false);
+        managerApprovedApprovals = (ListView)view.findViewById(R.id.managerApprovedApprovals);
         test = (Button)view.findViewById(R.id.test);
-        managerOwnGroupAdapter = new ManagerOwnGroupAdapter(this.getActivity(), R.layout.row_layout_manager_own_group);
-        managerOwnGroupList.setAdapter(managerOwnGroupAdapter);
-        managerOwnGroupAdapter.notifyDataSetChanged();
-        jsonString = GlobalData.getManagerGroupData();
+        managerApprovedApprovalsAdapter = new ManagerApprovedApprovalsAdapter(this.getActivity(), R.layout.row_layout_manager_approved);
+        managerApprovedApprovals.setAdapter(managerApprovedApprovalsAdapter);
+        managerApprovedApprovalsAdapter.notifyDataSetChanged();
+        jsonString = GlobalData.getManagerApprovedData();
+        //test.setText(jsonString);
 
 
         try {
@@ -51,12 +52,15 @@ public class FragmentManagerOwnGroup extends Fragment {
 
             while (count<jsonArray.length()){
                 JSONObject JO = jsonArray.getJSONObject(count);
-                employeeName = JO.getString("employeeName");
                 employeeEmail = JO.getString("employeeEmail");
-                employeePhone = JO.getString("employeePhone");
+                employeeName = JO.getString("employeeName");
+                taskAmount = JO.getString("taskAmount");
+                taskDescription = JO.getString("taskDescription");
+                taskStatus = JO.getString("taskStatus");
+                taskName = JO.getString("taskName");
 
-                ManagerGroupList managerGroupList = new ManagerGroupList(employeeName, employeeEmail, employeePhone);
-                managerOwnGroupAdapter.add(managerGroupList);
+                ManagerApprovedApprovalsList managerApprovedApprovalsList = new ManagerApprovedApprovalsList(employeeEmail, employeeName, taskAmount, taskDescription, taskStatus, taskName);
+                managerApprovedApprovalsAdapter.add(managerApprovedApprovalsList);
                 count++;
             }
 
@@ -66,10 +70,10 @@ public class FragmentManagerOwnGroup extends Fragment {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragmentManagerOwnGroup = new FragmentManagerOwnGroup();
+                Fragment fragmentManagerApprovedApprovals = new FragmentManagerApprovedApprovals();
                 android.app.FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerOwnGroup).commit();
+                fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerApprovedApprovals).commit();
             }
         });
 
@@ -80,16 +84,15 @@ public class FragmentManagerOwnGroup extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        super.onAttach(activity);
         try {
-            fragmentManager = (FragmentManager)activity;
+            fragmentManage = (FragmentManage)activity;
         }
         catch (Exception e){}
 
     }
 
-    public interface FragmentManager{
-        public void viewList(String email);
+    public interface FragmentManage{
+        public void viewApproved(String email);
     }
 
 

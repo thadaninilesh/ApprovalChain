@@ -8,6 +8,15 @@ public class GlobalData {
     public static String taskData = new String();
     public static String editData = new String();
     public static String managerGroupData = new String();
+    public static String managerApprovedData = new String();
+
+    public static String getManagerApprovedData() {
+        return managerApprovedData;
+    }
+
+    public static void setManagerApprovedData(String managerApprovedData) {
+        GlobalData.managerApprovedData = managerApprovedData;
+    }
 
     public static String getEditData() {
         return editData;

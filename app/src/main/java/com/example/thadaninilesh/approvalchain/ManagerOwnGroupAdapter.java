@@ -59,14 +59,7 @@ public class ManagerOwnGroupAdapter extends ArrayAdapter {
         managerGroupHolder.tx_employeeName.setText("Name: "+managerGroupList.getEmployeeName());
         managerGroupHolder.tx_employeeEmail.setText("Email: "+managerGroupList.getEmployeeEmail());
         managerGroupHolder.tx_employeePhone.setText("Phone: "+managerGroupList.getEmployeePhone());
-        if(managerGroupHolder.tx_employeeName.getText().toString().isEmpty()){
-            ManagerActivity managerActivity = new ManagerActivity();
-            MenuItem item = drawer.getMenu().findItem(R.id.action_something);
-            item.setCheckable(true);
-            item.setChecked(true);
-            managerActivity.onNavigationItemSelected(MenuIte);
-            //globalData.setBoolean(false);
-        }
+
         return row;
     }
 

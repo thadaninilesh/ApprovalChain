@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class ManagerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentManagerEditDetails.FragmentManage  {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentManagerEditDetails.FragmentManage, FragmentManagerApprovedApprovals.FragmentManage  {
     SharedPreferences sharedPreferences;
 
     @Override
@@ -27,7 +27,10 @@ public class ManagerActivity extends AppCompatActivity
         DetailsBackgroundClass detailsBackgroundClass = new DetailsBackgroundClass(this);
         detailsBackgroundClass.execute(email, method,name, phone);
     }
+    @Override
+    public void viewApproved(String email) {
 
+    }
 
 
     @Override
@@ -108,7 +111,7 @@ public class ManagerActivity extends AppCompatActivity
             sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
             final String email = sharedPreferences.getString("Email", "");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentManagerBackgroundClass.execute("owngrouplist",email);
+            fragmentManagerBackgroundClass.execute("owngrouplist", email);
             fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerOwnGroup).commit();
 
 
@@ -116,6 +119,13 @@ public class ManagerActivity extends AppCompatActivity
 
 
         } else if (id == R.id.approved_approvals) {
+            Fragment fragmentManagerApprovedApprovals = new FragmentManagerApprovedApprovals();
+            FragmentManagerBackgroundClass fragmentManagerBackgroundClass = new FragmentManagerBackgroundClass(this);
+            sharedPreferences = getSharedPreferences("ApprovalChain", Context.MODE_PRIVATE);
+            final String email = sharedPreferences.getString("Email", "");
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentManagerBackgroundClass.execute("approvedapprovals",email);
+            fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerApprovedApprovals).commit();
 
         } else if (id == R.id.edit_details) {
             Fragment fragmentManagerEditDetails = new FragmentManagerEditDetails();
