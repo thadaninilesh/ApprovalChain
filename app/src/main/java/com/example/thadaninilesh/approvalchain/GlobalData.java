@@ -60,7 +60,6 @@ public class GlobalData {
     public String getEditDetails(){ return editData; }
 
     public String getIPData(){
-        return "192.168.0.2";
+        return "192.168.0.7";
     }
-
 }

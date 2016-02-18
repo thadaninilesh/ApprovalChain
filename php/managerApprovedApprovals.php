@@ -3,12 +3,14 @@
 require "init.php";
 $email = $_POST['email'];
 $query = "SELECT id FROM employees WHERE email='$email'";
+//echo $query;
 $result = mysqli_query($con, $query);
 if(mysqli_num_rows($result)>0){
 	while($row = mysqli_fetch_array($result)){
 		$id = $row[0];
 	}
 	$query = "SELECT e.employee_name,e.email,t.tasks_name,t.tasks_description,t.task_amount,t.approval_status FROM employees e JOIN tasks t JOIN groups g WHERE t.manager_approve='$id'";
+	//echo $query;
 	$result = mysqli_query($con,$query);
 	if(mysqli_num_rows($result)>0){
 		$response = array();

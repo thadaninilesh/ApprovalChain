@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class ManagerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FragmentManagerEditDetails.FragmentManage, FragmentManagerApprovedApprovals.FragmentManage  {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentManagerEditDetails.FragmentManage, FragmentManagerApprovedApprovals.FragmentManage, FragmentManagerForApproval.FragmentManage  {
     SharedPreferences sharedPreferences;
 
     @Override
@@ -151,5 +151,8 @@ public class ManagerActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void pendingApprovals(String email) {
 
+    }
 }

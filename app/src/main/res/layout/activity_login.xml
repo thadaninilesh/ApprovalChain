@@ -67,6 +67,22 @@
 
             </LinearLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Employee Access"
+                android:onClick="tempEmployee"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manager Access"
+                android:onClick="tempManager"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Boss Access"
+                android:onClick="tempBoss"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

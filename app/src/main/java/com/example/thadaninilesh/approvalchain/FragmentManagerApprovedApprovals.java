@@ -67,15 +67,6 @@ public class FragmentManagerApprovedApprovals extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragmentManagerApprovedApprovals = new FragmentManagerApprovedApprovals();
-                android.app.FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame_manager, fragmentManagerApprovedApprovals).commit();
-            }
-        });
 
         return view;
     }

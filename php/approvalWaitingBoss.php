@@ -1,7 +1,7 @@
 <?php
 require "init.php";
 $email = $_POST['email'];
-$query = "SELECT e.employee_name, e.email, t.tasks_name, t.task_amount, t.tasks_description, g.group_name FROM employees e JOIN tasks t JOIN groups g WHERE e.email='$email' AND e.id=t.employee_id AND t.approval_status='1'";
+$query = "SELECT e.employee_name, e.email, t.tasks_name, t.task_amount, t.tasks_description, g.group_name FROM employees e JOIN tasks t JOIN groups g WHERE e.email='$email' AND t.approval_status='1'";
 $result = mysqli_query($con, $query);
 if(mysqli_num_rows($result)>0){
 	$response = array();

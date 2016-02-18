@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class LoginActivity extends AppCompatActivity {
     EditText et_email,et_password;
     String email,password,method;
-    SharedPreferences sharedPreferences;
+
     //UserSessionManager session;
     Button login, register, logout;
     @Override
@@ -50,5 +50,30 @@ public class LoginActivity extends AppCompatActivity {
         backgroundTask.execute(method, email, password);
         //AsyncTask<String, Void, String> r =
         finish();
+    }
+
+    public void tempEmployee(View view){
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("ApprovalChain", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Email", "employee@employee.employee");
+        editor.putString("Designation", "0");
+        startActivity(new Intent(this, EmployeeActivity.class));
+    }
+    public void tempManager(View view){
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("ApprovalChain", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Email", "manager@manager.manager");
+        editor.putString("Designation", "2");
+        startActivity(new Intent(this, ManagerActivity.class));
+    }
+    public void tempBoss(View view){
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences("ApprovalChain", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Email", "boss@boss.boss");
+        editor.putString("Designation", "1");
+        startActivity(new Intent(this, BossActivity.class));
     }
 }

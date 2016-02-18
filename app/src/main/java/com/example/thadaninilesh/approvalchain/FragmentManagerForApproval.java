@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentManagerForApproval extends Fragment implements android.widget.CompoundButton.OnCheckedChangeListener{
+public class FragmentManagerForApproval extends Fragment {
     String email;
     String jsonString;
     FragmentManage fragmentManage;
@@ -70,6 +70,7 @@ public class FragmentManagerForApproval extends Fragment implements android.widg
                 taskDescription = JO.getString("task_description");
                 taskAmount = JO.getString("task_amount");
 
+
                 ManagerForApprovalList managerForApprovalList = new ManagerForApprovalList(employeeEmail, employeeName, taskAmount, taskDescription, taskName);
                 managerForApprovalAdapter.add(managerForApprovalList);
                 count++;
@@ -93,11 +94,7 @@ public class FragmentManagerForApproval extends Fragment implements android.widg
 
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        int pos = managerToBeApproved.getPositionForView(buttonView);
 
-    }
 
     public interface FragmentManage{
         public void pendingApprovals(String email);

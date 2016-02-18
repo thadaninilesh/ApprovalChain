@@ -192,11 +192,11 @@ public class FragmentManagerBackgroundClass extends AsyncTask<String,Void,String
                 break;
             }
             case "approvedapprovals":{
-                Toast.makeText(ctx,"Approved Approvals",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx,"Approved requests",Toast.LENGTH_SHORT).show();
                 break;
             }
             case "pendingapprovals":{
-                Toast.makeText(ctx,"Pending Approvals",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx,"These are yet to be approved",Toast.LENGTH_SHORT).show();
                 break;
             }
         }
